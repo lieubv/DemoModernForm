@@ -74,7 +74,7 @@ struct LoginForm: View {
     }
 
     private func handleLogin() {
-        let isEmailValid = !email.isEmpty && isValidEmail(email)
+        let isEmailValid = !email.isEmpty && ValidationRule.email().validate(email)
         let isPasswordValid = !password.isEmpty
 
         if isEmailValid && isPasswordValid {
@@ -91,12 +91,6 @@ struct LoginForm: View {
             alertMessage = "Please enter a valid email and password."
             showingAlert = true
         }
-    }
-
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
     }
 }
 
