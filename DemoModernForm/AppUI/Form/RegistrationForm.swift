@@ -96,38 +96,38 @@ struct RegistrationForm: View {
                     ValidationRule(
                         validate: { value in
                             guard let confirmPassword = value as? String,
-                                  let password = formManager.fields["password"] as? String else {
-                                return false
-                            }
+                                  let password = formManager.fields["password"] as? String
+                            else { return false }
+
                             return confirmPassword == password
                         },
-                        errorMessage: "Passwords do not match"
+                        errorMessage: "Passwords must match"
                     )
                 ],
                 contentType: .newPassword
             )
 
-            // Terms and Conditions Agreement
+            // Terms of Service agreement
             VStack(alignment: .leading, spacing: 4) {
-                Toggle(isOn: Binding<Bool>(
+                Toggle("I agree to the Terms of Service", isOn: Binding(
                     get: {
-                        formManager.fields["termsAgreed"] as? Bool ?? false
+                        formManager.fields["agreeToTerms"] as? Bool ?? false
                     },
                     set: { newValue in
-                        formManager.updateField(id: "termsAgreed", value: newValue)
+                        formManager.updateField(id: "agreeToTerms", value: newValue)
                     }
-                )) {
-                    Text("I agree to the Terms and Conditions")
-                        .font(.caption)
-                }
+                ))
                 .onAppear {
-                    formManager.registerValidator(id: "termsAgreed") { (value: Bool) -> String? in
-                        return value ? nil : "You must agree to the terms and conditions"
+                    // Initialize with false
+                    formManager.updateField(id: "agreeToTerms", value: false)
+
+                    // Register validator
+                    formManager.registerValidator(id: "agreeToTerms") { (value: Bool) -> String? in
+                        return value ? nil : "You must agree to the Terms of Service"
                     }
-                    formManager.updateField(id: "termsAgreed", value: false)
                 }
 
-                if let error = formManager.errors["termsAgreed"] {
+                if let error = formManager.errors["agreeToTerms"] {
                     Text(error)
                         .font(.caption)
                         .foregroundColor(.red)
@@ -137,43 +137,68 @@ struct RegistrationForm: View {
 
             // Marketing preferences
             VStack(alignment: .leading, spacing: 4) {
-                Text("Communication Preferences")
+                Text("Marketing Preferences")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
-                Toggle(isOn: Binding<Bool>(
+                Toggle("Receive email updates", isOn: Binding(
                     get: {
-                        formManager.fields["emailMarketing"] as? Bool ?? false
+                        formManager.fields["emailUpdates"] as? Bool ?? false
                     },
                     set: { newValue in
-                        formManager.updateField(id: "emailMarketing", value: newValue)
+                        formManager.updateField(id: "emailUpdates", value: newValue)
                     }
-                )) {
-                    Text("Email me about product updates")
-                        .font(.caption)
-                }
+                ))
                 .onAppear {
-                    formManager.updateField(id: "emailMarketing", value: false)
+                    // Initialize with false
+                    formManager.updateField(id: "emailUpdates", value: false)
+                }
+            }
+            .padding(.vertical, 4)
+
+            // Birth date (custom component example)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Date of Birth")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                DatePicker(
+                    "",
+                    selection: Binding(
+                        get: {
+                            (formManager.fields["birthDate"] as? Date) ?? Date()
+                        },
+                        set: { newValue in
+                            formManager.updateField(id: "birthDate", value: newValue)
+                        }
+                    ),
+                    displayedComponents: .date
+                )
+                .datePickerStyle(WheelDatePickerStyle())
+                .frame(maxHeight: 160)
+                .onAppear {
+                    // Initialize with current date
+                    formManager.updateField(id: "birthDate", value: Date())
+
+                    // Register validator to check age
+                    formManager.registerValidator(id: "birthDate") { (value: Date) -> String? in
+                        let calendar = Calendar.current
+                        let ageComponents = calendar.dateComponents([.year], from: value, to: Date())
+                        let age = ageComponents.year ?? 0
+
+                        return age >= 18 ? nil : "You must be at least 18 years old"
+                    }
                 }
 
-                Toggle(isOn: Binding<Bool>(
-                    get: {
-                        formManager.fields["smsMarketing"] as? Bool ?? false
-                    },
-                    set: { newValue in
-                        formManager.updateField(id: "smsMarketing", value: newValue)
-                    }
-                )) {
-                    Text("Send me SMS notifications")
+                if let error = formManager.errors["birthDate"] {
+                    Text(error)
                         .font(.caption)
-                }
-                .onAppear {
-                    formManager.updateField(id: "smsMarketing", value: false)
+                        .foregroundColor(.red)
                 }
             }
             .padding(.vertical, 4)
         }
-        .navigationTitle("Sign Up")
+        .navigationTitle("Register")
     }
 }
 
