@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoModernFormApp: App {
     var body: some Scene {
         WindowGroup {
-            UserProfileForm()
+            MainTabView()
         }
     }
 }
