@@ -37,11 +37,6 @@ struct MainTabView: View {
                 LoginForm()
                     .navigationTitle("Login")
             }
-        case .registrationForm:
-            NavigationView {
-                RegistrationForm()
-                    .navigationTitle("Registration")
-            }
         case .userProfileForm:
             NavigationView {
                 UserProfileForm()

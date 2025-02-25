@@ -10,7 +10,6 @@ import Foundation
 enum TabItem: Int, CaseIterable {
     case basicForm = 0
     case loginForm
-    case registrationForm
     case userProfileForm
 
     // 2. Thuộc tính cho mỗi tab
@@ -20,8 +19,6 @@ enum TabItem: Int, CaseIterable {
             return "Basic"
         case .loginForm:
             return "Login"
-        case .registrationForm:
-            return "Registration"
         case .userProfileForm:
             return "User Profile"
         }
@@ -33,8 +30,6 @@ enum TabItem: Int, CaseIterable {
             return "house.fill"
         case .loginForm:
             return "magnifyingglass"
-        case .registrationForm:
-            return "person.fill"
         case .userProfileForm:
             return "person.crop.circle.fill"
         }
