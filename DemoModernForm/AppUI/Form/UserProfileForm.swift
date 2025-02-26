@@ -97,7 +97,7 @@ struct UserProfileForm: View {
         // Validate all fields
         let isFirstNameValid = !firstName.isEmpty && firstName.count >= 2
         let isLastNameValid = !lastName.isEmpty && lastName.count >= 2
-        let isEmailValid = !email.isEmpty && isValidEmail(email)
+        let isEmailValid = !email.isEmpty && ValidationRule.email().validate(email)
 
         let isFormValid = isFirstNameValid && isLastNameValid && isEmailValid
         // Note: phone is optional so we don't check it here
@@ -115,12 +115,6 @@ struct UserProfileForm: View {
         } else {
             showValidationMessages = true
         }
-    }
-
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
     }
 }
 
