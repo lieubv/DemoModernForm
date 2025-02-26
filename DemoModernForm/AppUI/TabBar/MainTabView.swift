@@ -42,6 +42,11 @@ struct MainTabView: View {
                 UserProfileForm()
                     .navigationTitle("User Profile")
             }
+        case .advancedForm:
+            NavigationView {
+                RegistrationForm()
+                    .navigationTitle("Registration Form")
+            }
         }
     }
 }

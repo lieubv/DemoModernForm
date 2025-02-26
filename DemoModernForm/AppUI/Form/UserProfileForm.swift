@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// The form created by using `SimpleForm`
 struct UserProfileForm: View {
     // Form state
     @State private var firstName = ""

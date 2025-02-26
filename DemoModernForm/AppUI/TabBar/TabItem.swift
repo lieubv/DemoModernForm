@@ -11,6 +11,7 @@ enum TabItem: Int, CaseIterable {
     case basicForm = 0
     case loginForm
     case userProfileForm
+    case advancedForm
 
     // 2. Thuộc tính cho mỗi tab
     var title: String {
@@ -21,6 +22,8 @@ enum TabItem: Int, CaseIterable {
             return "Login"
         case .userProfileForm:
             return "User Profile"
+        case .advancedForm:
+            return "Advanced form"
         }
     }
 
@@ -31,6 +34,8 @@ enum TabItem: Int, CaseIterable {
         case .loginForm:
             return "magnifyingglass"
         case .userProfileForm:
+            return "person.crop.circle.fill"
+        case .advancedForm:
             return "person.crop.circle.fill"
         }
     }
