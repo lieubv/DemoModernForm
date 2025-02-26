@@ -18,7 +18,7 @@ struct ManagedTextField: View {
     let placeholder: String
     let keyboardType: UIKeyboardType
     let contentType: UITextContentType?
-    let autocapitalization: UITextAutocapitalizationType
+    let autocapitalization: TextInputAutocapitalization
 
     @State private var text: String = ""
 
@@ -31,7 +31,7 @@ struct ManagedTextField: View {
         validationRules: [ValidationRule] = [],
         keyboardType: UIKeyboardType = .default,
         contentType: UITextContentType? = nil,
-        autocapitalization: UITextAutocapitalizationType = .sentences
+        autocapitalization: TextInputAutocapitalization = .sentences
     ) {
         self.id = id
         self.label = label

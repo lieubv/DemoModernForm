@@ -12,7 +12,7 @@ struct ManagedForm<Content: View>: View {
     let title: String
     @StateObject var formManager = FormManager()
     let onSubmit: ([String: Any]) -> Void
-    let content: (FormManager) -> Content
+    @ViewBuilder let content: (FormManager) -> Content
 
     @State private var showingSuccessMessage = false
 

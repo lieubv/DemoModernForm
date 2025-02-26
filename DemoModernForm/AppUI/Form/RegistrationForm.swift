@@ -51,7 +51,7 @@ struct RegistrationForm: View {
                 validationRules: [.email()],
                 keyboardType: .emailAddress,
                 contentType: .emailAddress,
-                autocapitalization: .none
+                autocapitalization: .never
             )
 
             // Phone Number - with phone keyboard
@@ -134,7 +134,3 @@ struct RegistrationForm_Previews: PreviewProvider {
         }
     }
 }
-
-//#Preview {
-//    RegistrationForm()
-//}

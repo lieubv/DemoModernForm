@@ -77,11 +77,13 @@ class FormManager: ObservableObject {
         isSubmitting = true
 
         // Simulate network delay with a simple delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
+        // Using Task instead of DispatchQueue
+        Task { @MainActor in
+            // Simulate network delay
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
 
             onSuccess(self.fields)
-            self.isSubmitting = false
+            isSubmitting = false
         }
     }
 }
