@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// 5. Form Container - manages multiple fields
 struct ReusableForm<Content: View>: View {
     let title: String
     let onSubmit: () -> Void

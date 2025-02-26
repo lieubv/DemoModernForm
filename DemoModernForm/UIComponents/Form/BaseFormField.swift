@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// 2. Base Form Field Model - provides common functionality
 struct BaseFormField<Input: View>: FormFieldProtocol {
     let id: String
     let isRequired: Bool

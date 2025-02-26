@@ -12,7 +12,6 @@ struct ValidationRule {
     let errorMessage: String
 }
 
-// 6. Common Validation Rules
 extension ValidationRule {
     static func email() -> ValidationRule {
         ValidationRule(
