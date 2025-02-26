@@ -11,7 +11,7 @@ import Combine
 /// Form Manager - handles form-wide state and validation
 class FormManager: ObservableObject {
     @Published var isValid = false
-    @Published var isDirty = false
+    @Published var hasChanged = false
     @Published var isSubmitting = false
     @Published var fields: [String: Any] = [:]
     @Published var errors: [String: String] = [:]
@@ -22,7 +22,7 @@ class FormManager: ObservableObject {
     /// Add or update a field value
     func updateField<T>(id: String, value: T) {
         fields[id] = value
-        isDirty = true
+        hasChanged = true
         validateField(id: id)
         validateForm()
     }
@@ -64,7 +64,7 @@ class FormManager: ObservableObject {
     func resetForm() {
         fields = [:]
         errors = [:]
-        isDirty = false
+        hasChanged = false
         isValid = false
     }
 

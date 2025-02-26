@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// The form created by using Advanced Form
 struct RegistrationForm: View {
     var body: some View {
         ManagedForm(
