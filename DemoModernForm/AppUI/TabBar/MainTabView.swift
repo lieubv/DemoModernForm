@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab: TabItem = .basicForm
+    @State private var selectedTab: TabItem = .basic
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Tạo view cho mỗi tab
+            // Create view for each tab
             ForEach(TabItem.allCases, id: \.self) { tab in
                 getTabView(tab)
                     .tabItem {
@@ -29,14 +29,19 @@ struct MainTabView: View {
         switch tab {
         case .basic:
             NavigationView {
-                BasicForm()
-                    .navigationTitle("Basic")
+                BasicListView()
             }
         case .advanced:
             NavigationView {
-                LoginForm()
-                    .navigationTitle("Advanced")
+                AdvancedListView()
             }
         }
+    }
+}
+
+// Preview provider
+struct MainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainTabView()
     }
 }
