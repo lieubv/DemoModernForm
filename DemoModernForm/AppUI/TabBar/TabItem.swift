@@ -8,34 +8,23 @@
 import Foundation
 
 enum TabItem: Int, CaseIterable {
-    case basicForm = 0
-    case loginForm
-    case userProfileForm
-    case advancedForm
+    case basic = 0
+    case advanced
 
-    // 2. Thuộc tính cho mỗi tab
     var title: String {
         switch self {
-        case .basicForm:
+        case .basic:
             return "Basic"
-        case .loginForm:
-            return "Login"
-        case .userProfileForm:
-            return "User Profile"
-        case .advancedForm:
-            return "Advanced form"
+        case .advanced:
+            return "Advanced"
         }
     }
 
     var icon: String {
         switch self {
-        case .basicForm:
-            return "house.fill"
-        case .loginForm:
-            return "magnifyingglass"
-        case .userProfileForm:
+        case .basic:
             return "person.crop.circle.fill"
-        case .advancedForm:
+        case .advanced:
             return "person.crop.circle.fill"
         }
     }

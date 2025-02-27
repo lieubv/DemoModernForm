@@ -27,25 +27,15 @@ struct MainTabView: View {
     @ViewBuilder
     func getTabView(_ tab: TabItem) -> some View {
         switch tab {
-        case .basicForm:
+        case .basic:
             NavigationView {
                 BasicForm()
                     .navigationTitle("Basic")
             }
-        case .loginForm:
+        case .advanced:
             NavigationView {
                 LoginForm()
-                    .navigationTitle("Login")
-            }
-        case .userProfileForm:
-            NavigationView {
-                UserProfileForm()
-                    .navigationTitle("User Profile")
-            }
-        case .advancedForm:
-            NavigationView {
-                RegistrationForm()
-                    .navigationTitle("Registration Form")
+                    .navigationTitle("Advanced")
             }
         }
     }
