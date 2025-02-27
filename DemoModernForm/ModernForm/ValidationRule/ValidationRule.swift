@@ -83,3 +83,39 @@ extension ValidationRule {
         )
     }
 }
+
+// MARK: - Additional Validation Rules for Collections
+extension ValidationRule {
+    /// Validate that a collection has exactly the specified number of items
+    static func exactCount(_ count: Int) -> ValidationRule {
+        ValidationRule(
+            validate: { value in
+                guard let collection = value as? any Collection else { return false }
+                return collection.count == count
+            },
+            errorMessage: "Must select exactly \(count) options"
+        )
+    }
+
+    /// Validate that a collection has at least the specified number of items
+    static func minCount(_ count: Int) -> ValidationRule {
+        ValidationRule(
+            validate: { value in
+                guard let collection = value as? any Collection else { return false }
+                return collection.count >= count
+            },
+            errorMessage: "Must select at least \(count) options"
+        )
+    }
+
+    /// Validate that a collection has at most the specified number of items
+    static func maxCount(_ count: Int) -> ValidationRule {
+        ValidationRule(
+            validate: { value in
+                guard let collection = value as? any Collection else { return false }
+                return collection.count <= count
+            },
+            errorMessage: "Cannot select more than \(count) options"
+        )
+    }
+}
