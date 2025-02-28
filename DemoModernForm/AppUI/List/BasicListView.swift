@@ -11,7 +11,6 @@ struct BasicListView: View {
     // Array of form items to display in the list
     private let formItems: [FormListItem] = [
         FormListItem(title: "User Profile", destination: AnyView(UserProfileForm())),
-        FormListItem(title: "Login", destination: AnyView(LoginForm())),
         FormListItem(title: "Basic Picker Example", destination: AnyView(BasicPickerFormExample()))
     ]
 
