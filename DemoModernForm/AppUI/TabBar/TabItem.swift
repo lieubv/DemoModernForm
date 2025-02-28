@@ -10,6 +10,7 @@ import Foundation
 enum TabItem: Int, CaseIterable {
     case basic = 0
     case advanced
+    case typeSafe
 
     var title: String {
         switch self {
@@ -17,6 +18,8 @@ enum TabItem: Int, CaseIterable {
             return "Basic"
         case .advanced:
             return "Advanced"
+        case .typeSafe:
+            return "TypeSafe"
         }
     }
 
@@ -26,6 +29,8 @@ enum TabItem: Int, CaseIterable {
             return "person.crop.circle.fill"
         case .advanced:
             return "person.crop.circle.fill"
+        case .typeSafe:
+            return "circle.square"
         }
     }
 }

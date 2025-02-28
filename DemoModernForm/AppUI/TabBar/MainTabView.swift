@@ -35,6 +35,10 @@ struct MainTabView: View {
             NavigationView {
                 AdvancedListView()
             }
+        case .typeSafe:
+            NavigationView {
+                TypeSafeListView()
+            }
         }
     }
 }
