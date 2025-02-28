@@ -1,0 +1,31 @@
+// Promt sửa form
+<Instructions>
+    <Use_case>
+        Tôi thường phải xử lý  trường hợp form sẽ cập nhật (xoá/ thêm nhiều trường mới) ở 1 trường dữ liệu cụ thể trong form.
+        Trong form có thể có nhiều section
+    </Use_case>
+
+    <Limitation>
+        Có một vấn đề với ManagedForm đó là let onSubmit: ([String: Any]) -> Void trả ra Any, điều này làm chúng ta phải parse lại dữ liệu mỗi lần submit form.
+    </Limitation>
+
+    <Constraints>   
+        Sử dụng các giải pháp hiện đại, áp dụng cho SwiftUI
+        Các giải pháp phải tương thích từ iOS 15
+        Sử dụng giải pháp đơn giản, dễ hiểu, không phải ép kiểu bằng as
+    </Constraints>
+
+    <Requirements>
+        Các field trong form phải được thiết kế để có khả năng tái sử dụng.
+        Field được quản lý theo id
+        Mỗi field có khả năng hỗ trợ nhiều validation rule cùng lúc.
+        Validation rule cần được thiết kể để tái sử dụng. Bạn có thể xem validation rule của TextFormField.
+    </Requirements>
+
+    <Output>
+        Giải thích bằng tiếng Việt, với thuật ngữ tiếng Anh hãy giữ nguyên, kèm chú thích tiếng Việt ở cạnh.
+        Chia phần trình bày thành các artifacts để dễ theo dõi
+        Đề xuất giải pháp tối ưu
+        Giải thích lí do tại sao làm thế
+    </Output>
+</Instructions>
