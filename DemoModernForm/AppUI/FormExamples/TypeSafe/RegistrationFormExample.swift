@@ -114,3 +114,12 @@ struct RegistrationFormExample: View {
         .navigationTitle("Sign Up")
     }
 }
+
+// Preview provider
+struct RegistrationFormExample_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            RegistrationFormExample()
+        }
+    }
+}

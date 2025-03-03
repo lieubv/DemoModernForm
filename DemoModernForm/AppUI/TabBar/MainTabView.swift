@@ -29,7 +29,6 @@ struct MainTabView: View {
         switch tab {
         case .basic:
             NavigationView {
-                BasicListView()
             }
         case .typeSafe:
             NavigationView {

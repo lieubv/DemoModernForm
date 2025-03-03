@@ -54,3 +54,12 @@ struct UserFormView: View {
         }
     }
 }
+
+// Preview provider
+struct UserFormView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            UserFormView()
+        }
+    }
+}
