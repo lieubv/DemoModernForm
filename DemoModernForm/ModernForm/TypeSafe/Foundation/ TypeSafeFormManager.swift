@@ -18,8 +18,8 @@ protocol FormData: Codable {
 
 /// Manager quản lý form an toàn về kiểu dữ liệu
 class TypeSafeFormManager<T: FormData>: ObservableObject {
-    // MARK: - Published Properties
 
+    // MARK: - Published Properties
     /// Dữ liệu form có kiểu xác định
     @Published var formData: T
 
@@ -35,8 +35,13 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
     /// Form đang được gửi hay không
     @Published var isSubmitting = false
 
-    // MARK: - Internal Properties
 
+    // MARK: - Section Management
+    /// Manager quản lý các section trong form
+    @Published var sectionManager = FormSectionManager<T>()
+
+
+    // MARK: - Internal Properties
     /// Bản đồ ánh xạ từ KeyPath string sang tên field
     /// Quan trọng: Dùng `internal` thay vì `private` để extension có thể truy cập
     internal var keyPathToFieldName: [String: String] = [:]
@@ -47,8 +52,8 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
     /// Cancellables để cleanup
     private var cancellables = Set<AnyCancellable>()
 
-    // MARK: - Initialization
 
+    // MARK: - Initialization
     /// Khởi tạo với dữ liệu form ban đầu
     init(initialData: T) {
         self.formData = initialData
@@ -61,7 +66,48 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
                 self?.validateForm()
             }
             .store(in: &cancellables)
+
+        // Theo dõi thay đổi của section manager
+        sectionManager.$sections
+            .sink { [weak self] _ in
+                self?.validateForm()
+            }
+            .store(in: &cancellables)
     }
+
+
+    // MARK: - Section Management Methods
+
+    /// Thêm section mới vào form
+    func addSection(_ section: FormSection<T>) {
+        sectionManager.addSection(section)
+    }
+
+    /// Cập nhật section hiện có
+    func updateSection(id: String, updater: (inout FormSection<T>) -> Void) {
+        sectionManager.updateSection(id: id, updater: updater)
+    }
+
+    /// Xóa section theo ID
+    func removeSection(withId id: String) {
+        sectionManager.removeSection(withId: id)
+    }
+
+    /// Ẩn/hiện section
+    func setVisibility(of sectionId: String, isVisible: Bool) {
+        sectionManager.setVisibility(of: sectionId, isVisible: isVisible)
+    }
+
+    /// Sắp xếp lại các section
+    func reorderSections(newOrder: [String]) {
+        sectionManager.reorderSections(newOrder: newOrder)
+    }
+
+    /// Lấy section theo ID
+    func getSection(withId id: String) -> FormSection<T>? {
+        return sectionManager.sections.first(where: { $0.id == id })
+    }
+
 
     // MARK: - Field Registration Methods
 
@@ -85,6 +131,7 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
         return keyPathString
     }
 
+
     // MARK: - Value Update Methods
 
     /// Cập nhật giá trị của một field bằng keypath
@@ -103,6 +150,7 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
 
         validateForm()
     }
+
 
     // MARK: - Validation Methods
 
