@@ -61,6 +61,6 @@ struct TypeSafeFormField<T: FormData, V, Label: View, Input: View>: View {
             }
         }
         .padding(.vertical, 4)
-        .animation(.easeInOut, value: formManager.errors[fieldId] != nil)
+//        .animation(.easeInOut, value: formManager.errors[fieldId] != nil)
     }
 }
