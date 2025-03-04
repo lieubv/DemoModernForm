@@ -48,7 +48,7 @@ struct TypeSafeFormField<T: FormData, V, Label: View, Input: View>: View {
                 get: { formManager.formData[keyPath: keyPath] },
                 set: { formManager.updateField(keyPath, value: $0) }
             ))
-            .padding(.vertical, 8)
+            .padding(8)
             .background(Color(.systemGray6))
             .cornerRadius(8)
 
