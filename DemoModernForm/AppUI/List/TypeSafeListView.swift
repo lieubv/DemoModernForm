@@ -11,12 +11,6 @@ struct TypeSafeListView: View {
     // Array of form items to display in the list
     private let formItems: [FormListItem] = [
         FormListItem(
-            title: "RegistrationFormExample",
-            destination: AnyView(
-                RegistrationFormExample()
-            )
-        ),
-        FormListItem(
             title: "UserFormView",
             destination: AnyView(
                 UserFormView()

@@ -25,6 +25,18 @@ extension ValidationRule {
         )
     }
 
+    static func vietnamesePhoneNumber() -> ValidationRule {
+        ValidationRule(
+            validate: { value in
+                guard let phoneNumber = value as? String else { return false }
+                let phoneNumberRegex = "^(0|\\+84)(3|5|7|8|9)([0-9]{8})$"
+                let phoneNumberPredicate = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
+                return phoneNumberPredicate.evaluate(with: phoneNumber)
+            },
+            errorMessage: "Please enter a valid phone number"
+        )
+    }
+
     static func minLength(_ length: Int) -> ValidationRule {
         ValidationRule(
             validate: { value in
