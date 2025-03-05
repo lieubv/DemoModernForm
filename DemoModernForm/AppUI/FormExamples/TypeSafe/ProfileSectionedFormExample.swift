@@ -57,7 +57,7 @@ struct ProfileSectionedFormExample: View {
             }
             .navigationTitle("Profile Form")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button(showWorkInfo ? "Hide Work Info" : "Show Work Info") {
                         toggleWorkSection()
                     }

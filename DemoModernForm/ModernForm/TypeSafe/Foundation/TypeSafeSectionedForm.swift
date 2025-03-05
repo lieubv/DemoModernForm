@@ -58,15 +58,18 @@ struct TypeSafeSectionedForm<T: FormData>: View {
 
             // Render visible sections
             ForEach(formManager.sectionManager.visibleSections) { section in
-                Section(
-                    header: Text(section.title).font(.subheadline),
-                    footer: section.description.map { Text($0).font(.caption) }
-                ) {
+                Section {
                     // Nếu section có content tùy chỉnh, sử dụng nó
                     if let content = section.content {
                         content(formManager)
                     }
+                } header: {
+                    Text(section.title).font(.subheadline)
+                } footer: {
+                    section.description.map { Text($0).font(.caption)
+                    }
                 }
+
             }
 
             // Submit button section
