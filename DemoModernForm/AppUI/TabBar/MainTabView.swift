@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab: TabItem = .basic
+    @State private var selectedTab: TabItem = .form
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -27,12 +27,12 @@ struct MainTabView: View {
     @ViewBuilder
     func getTabView(_ tab: TabItem) -> some View {
         switch tab {
-        case .basic:
-            NavigationView {
-            }
-        case .typeSafe:
+        case .form:
             NavigationView {
                 TypeSafeListView()
+            }
+        case .data:
+            NavigationView {
             }
         }
     }

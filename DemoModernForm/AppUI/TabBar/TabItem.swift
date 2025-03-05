@@ -8,23 +8,23 @@
 import Foundation
 
 enum TabItem: Int, CaseIterable {
-    case basic = 0
-    case typeSafe
+    case form = 0
+    case data
 
     var title: String {
         switch self {
-        case .basic:
-            return "Basic"
-        case .typeSafe:
-            return "TypeSafe"
+        case .form:
+            return "Form"
+        case .data:
+            return "Data"
         }
     }
 
     var icon: String {
         switch self {
-        case .basic:
+        case .form:
             return "person.crop.circle.fill"
-        case .typeSafe:
+        case .data:
             return "circle.square"
         }
     }

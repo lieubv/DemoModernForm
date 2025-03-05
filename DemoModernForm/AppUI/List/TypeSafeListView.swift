@@ -11,9 +11,15 @@ struct TypeSafeListView: View {
     // Array of form items to display in the list
     private let formItems: [FormListItem] = [
         FormListItem(
-            title: "UserFormView",
+            title: "User Info",
             destination: AnyView(
                 UserFormView()
+            )
+        ),
+        FormListItem(
+            title: "Edit Profile",
+            destination: AnyView(
+                EditProfileView()
             )
         )
     ]
@@ -25,7 +31,7 @@ struct TypeSafeListView: View {
                     .padding(.vertical, 8)
             }
         }
-        .navigationTitle("Type safe")
+        .navigationTitle("Form")
     }
 }
 

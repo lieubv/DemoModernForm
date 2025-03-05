@@ -1,5 +1,5 @@
 //
-//  ProfileSectionedFormExample.swift
+//  EditProfileView.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 4/3/25.
@@ -34,7 +34,7 @@ struct ProfileFormData: FormData {
 }
 
 // MARK: - View sử dụng Section Form
-struct ProfileSectionedFormExample: View {
+struct EditProfileView: View {
     // Quản lý form với dữ liệu khởi tạo
     @StateObject private var formManager = ModernFormManager(initialData: ProfileFormData())
 
@@ -180,6 +180,6 @@ struct ProfileSectionedFormExample: View {
 // Preview provider
 struct ProfileSectionedFormExample_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSectionedFormExample()
+        EditProfileView()
     }
 }
