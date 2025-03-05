@@ -36,14 +36,14 @@ struct ProfileFormData: FormData {
 // MARK: - View sử dụng Section Form
 struct ProfileSectionedFormExample: View {
     // Quản lý form với dữ liệu khởi tạo
-    @StateObject private var formManager = TypeSafeFormManager(initialData: ProfileFormData())
+    @StateObject private var formManager = ModernFormManager(initialData: ProfileFormData())
 
     // Đánh dấu thông tin công việc có hiển thị hay không
     @State private var showWorkInfo = true
 
     var body: some View {
         NavigationView {
-            TypeSafeSectionedForm(
+            ModernFormContainer(
                 title: "Edit Profile",
                 formManager: formManager,
                 onSubmit: { data in
@@ -69,7 +69,7 @@ struct ProfileSectionedFormExample: View {
     // Thiết lập các section cho form
     private func setupFormSections() {
         // 1. Section thông tin cá nhân
-        var personalSection = FormSection<ProfileFormData>(
+        var personalSection = ModernSection<ProfileFormData>(
             id: "personal",
             title: "Personal Information",
             description: "Basic information about you"
@@ -102,7 +102,7 @@ struct ProfileSectionedFormExample: View {
         }
 
         // 2. Section thông tin liên hệ
-        var contactSection = FormSection<ProfileFormData>(
+        var contactSection = ModernSection<ProfileFormData>(
             id: "contact",
             title: "Contact Information",
             description: "How we can reach you"
@@ -135,7 +135,7 @@ struct ProfileSectionedFormExample: View {
         }
 
         // 3. Section thông tin công việc (có thể ẩn/hiện)
-        var workSection = FormSection<ProfileFormData>(
+        var workSection = ModernSection<ProfileFormData>(
             id: "work",
             title: "Work Information",
             description: "Your professional details",

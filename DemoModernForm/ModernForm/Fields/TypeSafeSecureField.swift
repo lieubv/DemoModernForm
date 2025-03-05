@@ -22,7 +22,7 @@ struct TypeSafeSecureField<T: FormData>: View {
     let placeholder: String
 
     /// Form manager instance
-    @ObservedObject var formManager: TypeSafeFormManager<T>
+    @ObservedObject var formManager: ModernFormManager<T>
 
     /// Whether the field is required
     let isRequired: Bool
@@ -35,7 +35,7 @@ struct TypeSafeSecureField<T: FormData>: View {
         keyPath: WritableKeyPath<T, String>,
         label: String,
         placeholder: String = "",
-        formManager: TypeSafeFormManager<T>,
+        formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         validationRules: [ValidationRule] = [],
         contentType: UITextContentType? = nil
@@ -74,7 +74,7 @@ struct TypeSafeSecureField<T: FormData>: View {
 
     // MARK: - Body
     var body: some View {
-        TypeSafeFormField(
+        ModernFormField(
             keyPath: keyPath,
             formManager: formManager,
             isRequired: isRequired,

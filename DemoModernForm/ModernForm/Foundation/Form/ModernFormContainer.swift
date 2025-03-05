@@ -1,5 +1,5 @@
 //
-//  TypeSafeSectionedForm.swift
+//  ModernFormContainer.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 4/3/25.
@@ -9,14 +9,13 @@ import SwiftUI
 
 // MARK: - TypeSafeSectionedForm
 /// Form container với hỗ trợ quản lý section động
-/// Đây là phiên bản nâng cấp của `TypeSafeForm`
-struct TypeSafeSectionedForm<T: FormData>: View {
+struct ModernFormContainer<T: FormData>: View {
     // MARK: - Properties
     /// Tiêu đề form
     let title: String
 
     /// Form manager instance
-    @ObservedObject var formManager: TypeSafeFormManager<T>
+    @ObservedObject var formManager: ModernFormManager<T>
 
     /// Xử lý submit form
     let onSubmit: (T) -> Void
@@ -31,14 +30,14 @@ struct TypeSafeSectionedForm<T: FormData>: View {
         onSubmit: @escaping (T) -> Void
     ) {
         self.title = title
-        self._formManager = ObservedObject(wrappedValue: TypeSafeFormManager(initialData: initialData))
+        self._formManager = ObservedObject(wrappedValue: ModernFormManager(initialData: initialData))
         self.onSubmit = onSubmit
     }
 
     // Khởi tạo với form manager có sẵn
     init(
         title: String,
-        formManager: TypeSafeFormManager<T>,
+        formManager: ModernFormManager<T>,
         onSubmit: @escaping (T) -> Void
     ) {
         self.title = title
@@ -108,26 +107,5 @@ struct TypeSafeSectionedForm<T: FormData>: View {
                 }
             )
         }
-    }
-}
-
-// MARK: - FormSection+Builders
-/// Extension thêm các builder methods để tạo section content dễ dàng hơn
-extension FormSection {
-    /// Builder để tạo content cho section
-    mutating func setContent(@ViewBuilder _ contentBuilder: @escaping (TypeSafeFormManager<T>) -> some View) {
-        self.content = { formManager in
-            AnyView(contentBuilder(formManager))
-        }
-    }
-
-    /// Thêm field vào section
-    mutating func addField<V>(_ keyPath: KeyPath<T, V>) {
-        self.fieldKeyPaths.append(keyPath)
-    }
-
-    /// Thêm nhiều field vào section
-    mutating func addFields(_ keyPaths: [PartialKeyPath<T>]) {
-        self.fieldKeyPaths.append(contentsOf: keyPaths)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FormSectionManager.swift
+//  ModernSectionManager.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 4/3/25.
@@ -9,17 +9,17 @@ import Combine
 
 // MARK: - Section Collection Manager
 /// Class quản lý tập hợp các section trong form
-class FormSectionManager<T: FormData>: ObservableObject {
+class ModernSectionManager<T: FormData>: ObservableObject {
     // Danh sách các section
-    @Published var sections: [FormSection<T>] = []
+    @Published var sections: [ModernSection<T>] = []
 
     // Thêm section mới
-    func addSection(_ section: FormSection<T>) {
+    func addSection(_ section: ModernSection<T>) {
         sections.append(section)
     }
 
     // Cập nhật section hiện có
-    func updateSection(id: String, updater: (inout FormSection<T>) -> Void) {
+    func updateSection(id: String, updater: (inout ModernSection<T>) -> Void) {
         if let index = sections.firstIndex(where: { $0.id == id }) {
             var section = sections[index]
             updater(&section)
@@ -41,7 +41,7 @@ class FormSectionManager<T: FormData>: ObservableObject {
 
     // Sắp xếp lại các section
     func reorderSections(newOrder: [String]) {
-        var reorderedSections: [FormSection<T>] = []
+        var reorderedSections: [ModernSection<T>] = []
 
         for id in newOrder {
             if let section = sections.first(where: { $0.id == id }) {
@@ -59,7 +59,7 @@ class FormSectionManager<T: FormData>: ObservableObject {
     }
 
     // Lấy danh sách các section hiển thị
-    var visibleSections: [FormSection<T>] {
+    var visibleSections: [ModernSection<T>] {
         return sections.filter { $0.isVisible }
     }
 

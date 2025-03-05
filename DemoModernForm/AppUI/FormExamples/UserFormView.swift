@@ -30,11 +30,11 @@ struct UserForm: FormData {
 
 // Create a form view
 struct UserFormView: View {
-    @StateObject private var formManager = TypeSafeFormManager(initialData: UserForm())
+    @StateObject private var formManager = ModernFormManager(initialData: UserForm())
 
     var body: some View {
         NavigationView {
-            TypeSafeSectionedForm(
+            ModernFormContainer(
                 title: "User info",
                 formManager: formManager
             ) { data in
@@ -55,7 +55,7 @@ struct UserFormView: View {
 
     // MARK: - Setup form's sections
     private func personalSection() {
-        var personalSection = FormSection<UserForm>(
+        var personalSection = ModernSection<UserForm>(
             id: "personal",
             title: "Personal Information",
             description: "Basic information about you"
@@ -111,7 +111,7 @@ struct UserFormView: View {
     }
 
     private func securitySection() {
-        var securitySection = FormSection<UserForm>(
+        var securitySection = ModernSection<UserForm>(
             id: "security",
             title: "Security"
         )
@@ -141,7 +141,7 @@ struct UserFormView: View {
     }
 
     private func termSection() {
-        var termSection = FormSection<UserForm>(
+        var termSection = ModernSection<UserForm>(
             id: "tern",
             title: "Terms & conditions"
         )
@@ -149,7 +149,7 @@ struct UserFormView: View {
         termSection.setContent { formManager in
             VStack {
                 // Terms and Conditions
-                TypeSafeFormField(
+                ModernFormField(
                     keyPath: \.acceptTerms,
                     formManager: formManager,
                     isRequired: true,

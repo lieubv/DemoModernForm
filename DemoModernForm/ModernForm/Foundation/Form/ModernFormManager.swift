@@ -1,11 +1,11 @@
 //
-//   TypeSafeFormManager.swift
+//  ModernFormManager.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 28/2/25.
 //
 
-// TypeSafeFormManager.swift
+// ModernFormManager.swift
 
 import SwiftUI
 import Combine
@@ -17,7 +17,7 @@ protocol FormData: Codable {
 }
 
 /// Manager quản lý form an toàn về kiểu dữ liệu
-class TypeSafeFormManager<T: FormData>: ObservableObject {
+class ModernFormManager<T: FormData>: ObservableObject {
 
     // MARK: - Published Properties
     /// Dữ liệu form có kiểu xác định
@@ -38,7 +38,7 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
 
     // MARK: - Section Management
     /// Manager quản lý các section trong form
-    @Published var sectionManager = FormSectionManager<T>()
+    @Published var sectionManager = ModernSectionManager<T>()
 
 
     // MARK: - Internal Properties
@@ -79,12 +79,12 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
     // MARK: - Section Management Methods
 
     /// Thêm section mới vào form
-    func addSection(_ section: FormSection<T>) {
+    func addSection(_ section: ModernSection<T>) {
         sectionManager.addSection(section)
     }
 
     /// Cập nhật section hiện có
-    func updateSection(id: String, updater: (inout FormSection<T>) -> Void) {
+    func updateSection(id: String, updater: (inout ModernSection<T>) -> Void) {
         sectionManager.updateSection(id: id, updater: updater)
     }
 
@@ -104,7 +104,7 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
     }
 
     /// Lấy section theo ID
-    func getSection(withId id: String) -> FormSection<T>? {
+    func getSection(withId id: String) -> ModernSection<T>? {
         return sectionManager.sections.first(where: { $0.id == id })
     }
 
@@ -270,11 +270,17 @@ class TypeSafeFormManager<T: FormData>: ObservableObject {
 }
 
 // MARK: - Extension for KeyPath Helper Methods
-extension TypeSafeFormManager {
+extension ModernFormManager {
     /// Lấy tên field từ keypath
     /// - Parameter keyPath: KeyPath dẫn đến thuộc tính
     /// - Returns: Tên field đã đăng ký hoặc nil nếu chưa đăng ký
     func getFieldName<V>(for keyPath: KeyPath<T, V>) -> String? {
+        let keyPathString = String(describing: keyPath)
+        return keyPathToFieldName[keyPathString]
+    }
+
+    // Using explicit generic parameter declaration
+    func getFieldName(for keyPath: PartialKeyPath<T>) -> String? {
         let keyPathString = String(describing: keyPath)
         return keyPathToFieldName[keyPathString]
     }

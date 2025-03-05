@@ -1,5 +1,5 @@
 //
-//  TypeSafeFormField.swift
+//  ModernFormField.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 28/2/25.
@@ -9,14 +9,14 @@ import SwiftUI
 
 // MARK: - Base Form Field Component
 /// Base component for type-safe form fields
-struct TypeSafeFormField<T: FormData, V, Label: View, Input: View>: View {
+struct ModernFormField<T: FormData, V, Label: View, Input: View>: View {
     // MARK: - Properties
 
     /// KeyPath to the field in form data
     let keyPath: WritableKeyPath<T, V>
 
     /// Form manager instance
-    @ObservedObject var formManager: TypeSafeFormManager<T>
+    @ObservedObject var formManager: ModernFormManager<T>
 
     /// Whether the field is required
     let isRequired: Bool
