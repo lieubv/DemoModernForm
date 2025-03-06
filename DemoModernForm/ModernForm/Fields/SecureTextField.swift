@@ -1,5 +1,5 @@
 //
-//  TypeSafeTextField.swift
+//  SecureTextField.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 28/2/25.
@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-// MARK: - Type-Safe Text Field
-/// TextField implementation with type safety
-struct TypeSafeTextField<T: FormData>: View {
+// MARK: - Type-Safe Secure Field
+/// SecureField implementation with type safety
+struct SecureTextField<T: FormData>: View {
     // MARK: - Properties
+
     /// KeyPath to string field in form data
     let keyPath: WritableKeyPath<T, String>
 
@@ -26,10 +27,8 @@ struct TypeSafeTextField<T: FormData>: View {
     /// Whether the field is required
     let isRequired: Bool
 
-    // UI properties
-    let keyboardType: UIKeyboardType
+    /// Text content type
     let contentType: UITextContentType?
-    let autocapitalization: TextInputAutocapitalization
 
     // MARK: - Initialization
     init(
@@ -39,18 +38,14 @@ struct TypeSafeTextField<T: FormData>: View {
         formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         validationRules: [ValidationRule] = [],
-        keyboardType: UIKeyboardType = .default,
-        contentType: UITextContentType? = nil,
-        autocapitalization: TextInputAutocapitalization = .sentences
+        contentType: UITextContentType? = nil
     ) {
         self.keyPath = keyPath
         self.label = label
         self.placeholder = placeholder
         self.formManager = formManager
         self.isRequired = isRequired
-        self.keyboardType = keyboardType
         self.contentType = contentType
-        self.autocapitalization = autocapitalization
 
         // Register field with form manager if not already registered
         let keyPathString = String(describing: keyPath)
@@ -93,9 +88,7 @@ struct TypeSafeTextField<T: FormData>: View {
                 }
             },
             input: { binding in
-                TextField(placeholder, text: binding)
-                    .textInputAutocapitalization(autocapitalization)
-                    .keyboardType(keyboardType)
+                SecureField(placeholder, text: binding)
                     .textContentType(contentType)
             }
         )

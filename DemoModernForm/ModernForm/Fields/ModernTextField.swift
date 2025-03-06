@@ -1,5 +1,5 @@
 //
-//  TypeSafeSecureField.swift
+//  ModernTextField.swift
 //  DemoModernForm
 //
 //  Created by ChinhNT on 28/2/25.
@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-// MARK: - Type-Safe Secure Field
-/// SecureField implementation with type safety
-struct TypeSafeSecureField<T: FormData>: View {
+// MARK: - Type-Safe Text Field
+/// TextField implementation with type safety
+struct ModernTextField<T: FormData>: View {
     // MARK: - Properties
-
     /// KeyPath to string field in form data
     let keyPath: WritableKeyPath<T, String>
 
@@ -27,8 +26,10 @@ struct TypeSafeSecureField<T: FormData>: View {
     /// Whether the field is required
     let isRequired: Bool
 
-    /// Text content type
+    // UI properties
+    let keyboardType: UIKeyboardType
     let contentType: UITextContentType?
+    let autocapitalization: TextInputAutocapitalization
 
     // MARK: - Initialization
     init(
@@ -38,14 +39,18 @@ struct TypeSafeSecureField<T: FormData>: View {
         formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         validationRules: [ValidationRule] = [],
-        contentType: UITextContentType? = nil
+        keyboardType: UIKeyboardType = .default,
+        contentType: UITextContentType? = nil,
+        autocapitalization: TextInputAutocapitalization = .sentences
     ) {
         self.keyPath = keyPath
         self.label = label
         self.placeholder = placeholder
         self.formManager = formManager
         self.isRequired = isRequired
+        self.keyboardType = keyboardType
         self.contentType = contentType
+        self.autocapitalization = autocapitalization
 
         // Register field with form manager if not already registered
         let keyPathString = String(describing: keyPath)
@@ -88,7 +93,9 @@ struct TypeSafeSecureField<T: FormData>: View {
                 }
             },
             input: { binding in
-                SecureField(placeholder, text: binding)
+                TextField(placeholder, text: binding)
+                    .textInputAutocapitalization(autocapitalization)
+                    .keyboardType(keyboardType)
                     .textContentType(contentType)
             }
         )

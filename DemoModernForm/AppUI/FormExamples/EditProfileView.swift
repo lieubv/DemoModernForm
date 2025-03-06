@@ -78,7 +78,7 @@ struct EditProfileView: View {
         personalSection.setContent { formManager in
             VStack {
                 // First Name
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.firstName,
                     label: "First Name",
                     placeholder: "Enter your first name",
@@ -88,7 +88,7 @@ struct EditProfileView: View {
                 )
 
                 // Last Name
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.lastName,
                     label: "Last Name",
                     placeholder: "Enter your last name",
@@ -111,7 +111,7 @@ struct EditProfileView: View {
         contactSection.setContent { formManager in
             VStack {
                 // Email
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.email,
                     label: "Email Address",
                     placeholder: "you@example.com",
@@ -124,7 +124,7 @@ struct EditProfileView: View {
                 )
 
                 // Phone
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.phone,
                     label: "Phone Number",
                     placeholder: "Your phone number",
@@ -145,7 +145,7 @@ struct EditProfileView: View {
         workSection.setContent { formManager in
             VStack {
                 // Company
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.company,
                     label: "Company",
                     placeholder: "Company name",
@@ -153,7 +153,7 @@ struct EditProfileView: View {
                 )
 
                 // Position
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.position,
                     label: "Position",
                     placeholder: "Your job title",

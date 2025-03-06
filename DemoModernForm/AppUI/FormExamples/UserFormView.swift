@@ -63,7 +63,7 @@ struct UserFormView: View {
 
         personalSection.setContent { formManager in
             VStack {
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.firstName,
                     label: "First name",
                     placeholder: "Your name",
@@ -73,7 +73,7 @@ struct UserFormView: View {
                     contentType: .givenName
                 )
 
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.lastName,
                     label: "Last name",
                     placeholder: "Your last name",
@@ -83,7 +83,7 @@ struct UserFormView: View {
                     contentType: .familyName
                 )
 
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.phoneNumber,
                     label: "Phone number",
                     placeholder: "Enter your phone number",
@@ -94,7 +94,7 @@ struct UserFormView: View {
                     contentType: .telephoneNumber
                 )
 
-                TypeSafeTextField(
+                ModernTextField(
                     keyPath: \.email,
                     label: "Email",
                     placeholder: "Enter your email",
@@ -118,7 +118,7 @@ struct UserFormView: View {
 
         securitySection.setContent { formManager in
             VStack {
-                TypeSafeSecureField(
+                SecureTextField(
                     keyPath: \.password,
                     label: "Password",
                     placeholder: "Create a password",
@@ -127,7 +127,7 @@ struct UserFormView: View {
                     validationRules: [.minLength(8)]
                 )
 
-                TypeSafeSecureField(
+                SecureTextField(
                     keyPath: \.confirmPassword,
                     label: "Confirm Password",
                     placeholder: "Enter your password again",
