@@ -15,6 +15,10 @@ struct UserForm: FormData {
     var password: String = ""
     var confirmPassword: String = ""
     var acceptTerms: Bool = false
+    
+    var birthDate: Date = Date()
+    var skills: [Skill] = []
+    var jobPosition: JobPosition = .developer
 
     static var requiredFields: [String] {
         return [
@@ -49,6 +53,7 @@ struct UserFormView: View {
     // MARK: - Setup form
     private func setupForm() {
         personalSection()
+        additionalInfoSection()
         securitySection()
         termSection()
     }
@@ -108,6 +113,52 @@ struct UserFormView: View {
         }
 
         formManager.addSection(personalSection)
+    }
+    
+    private func additionalInfoSection() {
+        var infoSection = ModernSection<UserForm>(
+            id: "additional",
+            title: "Additional Information",
+            description: "More details about you"
+        )
+        
+        infoSection.setContent { formManager in
+            VStack {
+                // Date of Birth - Using DatePickerField
+                DatePickerField(
+                    keyPath: \.birthDate,
+                    label: "Date of Birth",
+                    formManager: formManager,
+                    isRequired: false,
+                    displayMode: .date,
+                    minDate: Calendar.current.date(byAdding: .year, value: -100, to: Date()),
+                    maxDate: Calendar.current.date(byAdding: .year, value: -18, to: Date())
+                )
+                
+                // Skills - Using MultiPickerField
+                MultiPickerField(
+                    keyPath: \.skills,
+                    label: "Skills",
+                    options: Skill.allSkills,
+                    formManager: formManager,
+                    minSelections: 1,
+                    maxSelections: 3
+                ) { skill in
+                    skill.name
+                }
+                
+                // Job Position - Using SinglePickerField
+                SinglePickerField(
+                    keyPath: \.jobPosition,
+                    label: "Job Position",
+                    formManager: formManager
+                ) { color in
+                    color.displayName
+                }
+            }
+        }
+        
+        formManager.addSection(infoSection)
     }
 
     private func securitySection() {

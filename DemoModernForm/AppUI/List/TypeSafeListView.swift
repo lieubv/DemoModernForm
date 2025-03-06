@@ -8,18 +8,11 @@
 import SwiftUI
 
 struct TypeSafeListView: View {
-    // Array of form items to display in the list
     private let formItems: [FormListItem] = [
         FormListItem(
             title: "User Info",
             destination: AnyView(
                 UserFormView()
-            )
-        ),
-        FormListItem(
-            title: "Edit Profile",
-            destination: AnyView(
-                EditProfileView()
             )
         )
     ]

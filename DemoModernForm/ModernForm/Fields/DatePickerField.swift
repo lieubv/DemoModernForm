@@ -80,8 +80,6 @@ struct DatePickerField<T: FormData>: View {
     }
     
     // MARK: - Date Formatter
-    // Using a computed property instead of a static stored property
-    // to avoid the "Static stored properties not supported in generic contexts" error
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -91,30 +89,33 @@ struct DatePickerField<T: FormData>: View {
     
     // MARK: - Body
     var body: some View {
-        ModernFormField(
-            keyPath: keyPath,
-            formManager: formManager,
-            isRequired: isRequired,
-            label: {
-                HStack {
-                    Text(label)
-                    if isRequired {
-                        Text("*")
-                            .foregroundColor(.red)
+        HStack {
+            ModernFormField(
+                keyPath: keyPath,
+                formManager: formManager,
+                isRequired: isRequired,
+                label: {
+                    HStack {
+                        Text(label)
+                        if isRequired {
+                            Text("*")
+                                .foregroundColor(.red)
+                        }
                     }
+                },
+                input: { binding in
+                    DatePicker(
+                        "",
+                        selection: binding,
+                        in: rangeConstraint,
+                        displayedComponents: displayMode
+                    )
+                    .datePickerStyle(DefaultDatePickerStyle())
+                    .labelsHidden()
                 }
-            },
-            input: { binding in
-                DatePicker(
-                    "",
-                    selection: binding,
-                    in: rangeConstraint,
-                    displayedComponents: displayMode
-                )
-                .datePickerStyle(DefaultDatePickerStyle())
-                .labelsHidden()
-            }
-        )
+            )
+            Spacer()
+        }
     }
     
     // MARK: - Helper Properties

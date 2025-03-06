@@ -166,7 +166,3 @@ struct SinglePickerField_Previews: PreviewProvider {
         }
     }
 }
-
-// MARK: - Helper comment for FavoriteColor
-// Note: FavoriteColor should already conform to CaseIterable from your implementation
-// If not, make sure FavoriteColor conforms to Codable and CaseIterable
