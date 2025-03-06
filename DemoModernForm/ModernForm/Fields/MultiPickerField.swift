@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// A type-safe field for selecting multiple items from a list
 struct MultiPickerField<T: FormData, V: Identifiable & Hashable>: View {
     // MARK: - Properties
     

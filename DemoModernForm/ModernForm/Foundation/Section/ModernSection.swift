@@ -26,7 +26,7 @@ struct ModernSection<T: FormData>: Identifiable {
     var fieldKeyPaths: [PartialKeyPath<T>]
 
     // Tạo content cho section này
-    // Ta sử dụng closure để cho phép tùy chỉnh nội dung section
+    // Sử dụng closure để cho phép tùy chỉnh nội dung section
     var content: ((ModernFormManager<T>) -> AnyView)?
 
     // Khởi tạo với các tham số cơ bản

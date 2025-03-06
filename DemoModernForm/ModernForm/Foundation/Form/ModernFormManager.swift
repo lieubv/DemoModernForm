@@ -10,13 +10,10 @@
 import SwiftUI
 import Combine
 
-/// Protocol định nghĩa dữ liệu form
 protocol FormData: Codable {
-    /// Các trường bắt buộc nhập
     static var requiredFields: [String] { get }
 }
 
-/// Manager quản lý form an toàn về kiểu dữ liệu
 class ModernFormManager<T: FormData>: ObservableObject {
 
     // MARK: - Published Properties

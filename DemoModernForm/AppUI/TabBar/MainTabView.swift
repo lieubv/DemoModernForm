@@ -33,6 +33,7 @@ struct MainTabView: View {
             }
         case .data:
             NavigationView {
+                DataListView()
             }
         }
     }

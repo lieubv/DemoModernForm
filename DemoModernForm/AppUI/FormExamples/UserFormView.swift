@@ -32,9 +32,12 @@ struct UserForm: FormData {
     }
 }
 
-// Create a form view
 struct UserFormView: View {
     @StateObject private var formManager = ModernFormManager(initialData: UserForm())
+    
+    @ObservedObject private var dataManager = UserDataManager.shared
+    
+    @State private var showingSavedConfirmation = false
 
     var body: some View {
         NavigationView {
@@ -42,7 +45,8 @@ struct UserFormView: View {
                 title: "User info",
                 formManager: formManager
             ) { data in
-                print(data)
+                self.dataManager.addSubmission(formData: data)
+                print("Form data saved successfully!")
             }
         }
         .onAppear {
@@ -124,7 +128,6 @@ struct UserFormView: View {
         
         infoSection.setContent { formManager in
             VStack {
-                // Date of Birth - Using DatePickerField
                 DatePickerField(
                     keyPath: \.birthDate,
                     label: "Date of Birth",
@@ -135,7 +138,6 @@ struct UserFormView: View {
                     maxDate: Calendar.current.date(byAdding: .year, value: -18, to: Date())
                 )
                 
-                // Skills - Using MultiPickerField
                 MultiPickerField(
                     keyPath: \.skills,
                     label: "Skills",
@@ -147,7 +149,6 @@ struct UserFormView: View {
                     skill.name
                 }
                 
-                // Job Position - Using SinglePickerField
                 SinglePickerField(
                     keyPath: \.jobPosition,
                     label: "Job Position",
@@ -199,7 +200,6 @@ struct UserFormView: View {
 
         termSection.setContent { formManager in
             VStack {
-                // Terms and Conditions
                 ModernFormField(
                     keyPath: \.acceptTerms,
                     formManager: formManager,

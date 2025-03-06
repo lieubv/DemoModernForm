@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// A type-safe field component for selecting dates in forms
 struct DatePickerField<T: FormData>: View {
     // MARK: - Properties
     

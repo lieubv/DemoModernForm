@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// A type-safe picker field for selecting a single option from a list of choices
 struct SinglePickerField<T: FormData, V: Hashable & CaseIterable>: View {
     // MARK: - Properties
     

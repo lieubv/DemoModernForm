@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Type-Safe Secure Field
-/// SecureField implementation with type safety
 struct SecureTextField<T: FormData>: View {
     // MARK: - Properties
 

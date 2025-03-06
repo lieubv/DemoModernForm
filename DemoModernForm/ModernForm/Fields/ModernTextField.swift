@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Type-Safe Text Field
-/// TextField implementation with type safety
 struct ModernTextField<T: FormData>: View {
     // MARK: - Properties
     /// KeyPath to string field in form data
