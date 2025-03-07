@@ -58,7 +58,7 @@ struct UserFormView: View {
     private func setupForm() {
         personalSection()
         additionalInfoSection()
-        securitySection()
+//        securitySection()
         termSection()
     }
 
@@ -73,30 +73,30 @@ struct UserFormView: View {
         personalSection.setContent { formManager in
             VStack {
                 ModernTextField(
+                    formManager: formManager,
                     keyPath: \.firstName,
                     label: "First name",
                     placeholder: "Your name",
-                    formManager: formManager,
                     isRequired: true,
                     validationRules: [.minLength(2)],
                     contentType: .givenName
                 )
 
                 ModernTextField(
+                    formManager: formManager,
                     keyPath: \.lastName,
                     label: "Last name",
                     placeholder: "Your last name",
-                    formManager: formManager,
                     isRequired: true,
                     validationRules: [.minLength(2)],
                     contentType: .familyName
                 )
 
                 ModernTextField(
+                    formManager: formManager,
                     keyPath: \.phoneNumber,
                     label: "Phone number",
                     placeholder: "Enter your phone number",
-                    formManager: formManager,
                     isRequired: true,
                     validationRules: [.vietnamesePhoneNumber()],
                     keyboardType: .phonePad,
@@ -104,10 +104,10 @@ struct UserFormView: View {
                 )
 
                 ModernTextField(
+                    formManager: formManager,
                     keyPath: \.email,
                     label: "Email",
                     placeholder: "Enter your email",
-                    formManager: formManager,
                     isRequired: true,
                     validationRules: [.email()],
                     keyboardType: .emailAddress,
@@ -129,9 +129,9 @@ struct UserFormView: View {
         infoSection.setContent { formManager in
             VStack {
                 DatePickerField(
+                    formManager: formManager,
                     keyPath: \.birthDate,
                     label: "Date of Birth",
-                    formManager: formManager,
                     isRequired: false,
                     displayMode: .date,
                     minDate: Calendar.current.date(byAdding: .year, value: -100, to: Date()),
@@ -139,10 +139,10 @@ struct UserFormView: View {
                 )
                 
                 MultiPickerField(
+                    formManager: formManager,
                     keyPath: \.skills,
                     label: "Skills",
                     options: Skill.allSkills,
-                    formManager: formManager,
                     minSelections: 1,
                     maxSelections: 3
                 ) { skill in
@@ -150,9 +150,9 @@ struct UserFormView: View {
                 }
                 
                 SinglePickerField(
+                    formManager: formManager,
                     keyPath: \.jobPosition,
-                    label: "Job Position",
-                    formManager: formManager
+                    label: "Job Position"
                 ) { color in
                     color.displayName
                 }
@@ -171,19 +171,19 @@ struct UserFormView: View {
         securitySection.setContent { formManager in
             VStack {
                 SecureTextField(
+                    formManager: formManager,
                     keyPath: \.password,
                     label: "Password",
                     placeholder: "Create a password",
-                    formManager: formManager,
                     isRequired: true,
                     validationRules: [.minLength(8)]
                 )
 
                 SecureTextField(
+                    formManager: formManager,
                     keyPath: \.confirmPassword,
                     label: "Confirm Password",
                     placeholder: "Enter your password again",
-                    formManager: formManager,
                     isRequired: true
                 )
             }
@@ -199,25 +199,13 @@ struct UserFormView: View {
         )
 
         termSection.setContent { formManager in
-            VStack {
-                ModernFormField(
-                    keyPath: \.acceptTerms,
-                    formManager: formManager,
-                    isRequired: true,
-                    label: { EmptyView() },
-                    input: { binding in
-                        Toggle(isOn: binding) {
-                            Text("I accept the Terms and Conditions")
-                                .font(.subheadline)
-                        }
-                    }
-                )
-                .onAppear {
-                    formManager.registerValidator(for: \.acceptTerms) { value -> String? in
-                        return value ? nil : "You must accept the terms to continue"
-                    }
-                }
-            }
+            ModernToggleField(
+                formManager: formManager,
+                keyPath: \.acceptTerms,
+                label: "Accept Terms & Conditions",
+                isRequired: true,
+                description: "You must accept the terms to continue"
+            )
         }
 
         formManager.addSection(termSection)
