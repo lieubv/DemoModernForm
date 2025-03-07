@@ -135,7 +135,7 @@ struct UserFormView: View {
                     isRequired: false,
                     displayMode: .date,
                     minDate: Calendar.current.date(byAdding: .year, value: -100, to: Date()),
-                    maxDate: Calendar.current.date(byAdding: .year, value: -18, to: Date())
+                    maxDate: Date()
                 )
                 
                 MultiPickerField(
