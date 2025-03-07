@@ -33,9 +33,9 @@ struct DatePickerField<T: FormData>: View {
     
     // MARK: - Initialization
     init(
+        formManager: ModernFormManager<T>,
         keyPath: WritableKeyPath<T, Date>,
         label: String,
-        formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         displayMode: DatePickerComponents = .date,
         minDate: Date? = nil,
@@ -90,8 +90,8 @@ struct DatePickerField<T: FormData>: View {
     var body: some View {
         HStack {
             ModernFormField(
-                keyPath: keyPath,
                 formManager: formManager,
+                keyPath: keyPath,
                 isRequired: isRequired,
                 label: {
                     HStack {
@@ -137,9 +137,9 @@ struct DatePickerField_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             DatePickerField(
+                formManager: ModernFormManager(initialData: TestData()),
                 keyPath: \TestData.selectedDate,
                 label: "Birthdate",
-                formManager: ModernFormManager(initialData: TestData()),
                 isRequired: true,
                 displayMode: .hourAndMinute
             )

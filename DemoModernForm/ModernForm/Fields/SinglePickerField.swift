@@ -32,9 +32,9 @@ struct SinglePickerField<T: FormData, V: Hashable & CaseIterable>: View {
     
     // MARK: - Initialization
     init(
+        formManager: ModernFormManager<T>,
         keyPath: WritableKeyPath<T, V>,
         label: String,
-        formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         displayText: @escaping (V) -> String
     ) {
@@ -55,8 +55,8 @@ struct SinglePickerField<T: FormData, V: Hashable & CaseIterable>: View {
     // MARK: - Body
     var body: some View {
         ModernFormField(
-            keyPath: keyPath,
             formManager: formManager,
+            keyPath: keyPath,
             isRequired: isRequired,
             label: {
                 HStack {
@@ -130,9 +130,9 @@ extension SinglePickerField where V: RawRepresentable, V.RawValue == String {
         isRequired: Bool = false
     ) {
         self.init(
+            formManager: formManager,
             keyPath: keyPath,
             label: label,
-            formManager: formManager,
             isRequired: isRequired,
             displayText: { $0.rawValue.capitalized }
         )
@@ -156,9 +156,9 @@ struct SinglePickerField_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             SinglePickerField(
+                formManager: ModernFormManager(initialData: TestData()),
                 keyPath: \TestData.selectedColor,
-                label: "Favorite Color",
-                formManager: ModernFormManager(initialData: TestData())
+                label: "Favorite Color"
             ) { color in
                 color.rawValue.capitalized
             }

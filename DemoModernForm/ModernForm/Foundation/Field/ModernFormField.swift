@@ -12,11 +12,11 @@ import SwiftUI
 struct ModernFormField<T: FormData, V, Label: View, Input: View>: View {
     // MARK: - Properties
 
-    /// KeyPath to the field in form data
-    let keyPath: WritableKeyPath<T, V>
-
     /// Form manager instance
     @ObservedObject var formManager: ModernFormManager<T>
+
+    /// KeyPath to the field in form data
+    let keyPath: WritableKeyPath<T, V>
 
     /// Whether the field is required
     let isRequired: Bool

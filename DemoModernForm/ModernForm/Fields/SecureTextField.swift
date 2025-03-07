@@ -30,10 +30,10 @@ struct SecureTextField<T: FormData>: View {
 
     // MARK: - Initialization
     init(
+        formManager: ModernFormManager<T>,
         keyPath: WritableKeyPath<T, String>,
         label: String,
         placeholder: String = "",
-        formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         validationRules: [ValidationRule] = [],
         contentType: UITextContentType? = nil
@@ -73,8 +73,8 @@ struct SecureTextField<T: FormData>: View {
     // MARK: - Body
     var body: some View {
         ModernFormField(
-            keyPath: keyPath,
             formManager: formManager,
+            keyPath: keyPath,
             isRequired: isRequired,
             label: {
                 HStack {

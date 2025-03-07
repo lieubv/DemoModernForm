@@ -41,10 +41,10 @@ struct MultiPickerField<T: FormData, V: Identifiable & Hashable>: View {
     
     // MARK: - Initialization
     init(
+        formManager: ModernFormManager<T>,
         keyPath: WritableKeyPath<T, [V]>,
         label: String,
         options: [V],
-        formManager: ModernFormManager<T>,
         isRequired: Bool = false,
         minSelections: Int? = nil,
         maxSelections: Int? = nil,
@@ -89,8 +89,8 @@ struct MultiPickerField<T: FormData, V: Identifiable & Hashable>: View {
     // MARK: - Body
     var body: some View {
         ModernFormField(
-            keyPath: keyPath,
             formManager: formManager,
+            keyPath: keyPath,
             isRequired: isRequired,
             label: {
                 HStack {
@@ -203,10 +203,10 @@ struct MultiPickerField_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             MultiPickerField(
+                formManager: ModernFormManager(initialData: TestData()),
                 keyPath: \TestData.selectedSkills,
                 label: "Skills",
                 options: Skill.allSkills,
-                formManager: ModernFormManager(initialData: TestData()),
                 isRequired: true,
                 minSelections: 1,
                 maxSelections: Skill.allSkills.count
