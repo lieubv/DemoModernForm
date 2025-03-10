@@ -12,7 +12,8 @@ struct TypeSafeListView: View {
         FormListItem(
             title: "User Info",
             destination: AnyView(
-                UserFormView()
+                //UserFormView()
+                IssueFormView(formData: IssueFormData())
             )
         )
     ]
